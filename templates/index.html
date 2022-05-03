@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Karttime 2 Data</title>
+        <style>
+            body{
+                background-color: rgb(41, 37, 37);
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+            .Creater {
+                font-family: Shanti;
+                font-size: 1em;
+                margin: 0px;
+                color: #cf433b;
+            }
+            .Header{
+                font-family: Shanti;
+                font-size: 2em;
+                color: #cf433b;
+            }
+            .image{
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                object-position: 50% 30%;
+                display: block;
+            }
+            .image-conatainer{
+                background-color: rgb(29, 28, 28);
+                padding: 5px;
+            }
+            .navbar{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            a {
+                font-family: Shanti;
+                font-size: 1.2em;
+                color: #cf433b;
+                text-decoration: none;
+                margin-left: 16px;
+            }
+            a:hover{
+                font-weight: 1000;
+                text-decoration: underline;
+            }
+            .input_text{
+                text-align: center;
+                font-family: Shanti;
+                font-size: 1.5em;
+                color: #cf433b;
+                font-weight: 1000;
+            }
+
+            .file_input{
+                color: #cf433b;
+                width: 100%;
+                height: 100%;
+                margin: 30px;
+                border: none;
+                border-radius: 2px;
+                font-family: Shanti;
+                text-align: center;
+                font-size: 1.0em;
+
+            }
+            .file_input:focus{
+                outline: none;
+            }
+
+            .create {
+                margin: 15px;
+                margin-left: 45%;
+                background-color: #cf433b;
+                font-family: Shanti;
+                font-size: 1.2em;
+                border-radius: 5px;
+                color: white;
+                width: 200px;
+                height: 50px;
+            }
+            .create:hover {
+                background-color: #74231f;
+                font-weight: 1000;
+                cursor: pointer;
+            }
+            .Karttimes{
+                background-color:rgb(41, 37, 37);
+                margin: 15px;
+             
+            }
+            .Karttimes_text{
+                font-family: Shanti;
+                font-size: 1.2em;
+                color: #cf433b;
+                text-align: center;
+            }
+            .Karttimes_text:hover{
+                font-size: 1.3em;
+                font-weight: 1000;
+            }
+
+            .legal-content{
+                margin-top: 20%;
+                display: flex;
+                justify-content: flex-start;
+                font-family: Shanti;
+                color: #cf433b;
+            }
+            .legal-text{
+                
+                font-weight: 1000;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+    
+        <p class="Creater">
+            Created by Kevin Thalmann
+        </p>
+     
+        <div class="navbar">
+            <h1 class="Header">
+                KARTTIME 2 DATA
+            </h1>
+
+            <div>
+                <a href="#">Infos</a>
+                <a href="#">Fragen</a>
+                <a href="https://www.instagram.com/kevin.thalmann222">Instagram</a>
+            </div>
+
+        </div>
+
+        <div class="image-container">
+            <img class="image" src="{{ url_for('static', filename='Kartlogo_new.jpg') }}" alt="Kartlogo" title="KARTTIME">
+            <br>
+        </div>
+
+        
+        <form action="getdata" method="post" enctype="multipart/form-data">
+            <div class="input_text">
+                {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endwith %}
+            </div>
+
+            <input class="file_input" type="file" name="name_input">
+            <input class="create" type="submit" value="Laden">
+
+        </form>
+        
+        <div class="Karttimes">
+            {% for lap in show_kart_laps %}
+                <p class="Karttimes_text">LAP: {{ lap['LAP'] }}  TIME: {{ lap['Time'] }}  KART: {{ lap['Kart'] }}</p>
+            {% endfor %}
+        </div>
+
+
+        <div class="legal-content">
+            <span class="legal-text">(c) 2022 - Kevin Thalmann</span><a href="#">Impressum</a><a href="#">Datenschutz</a>
+        </div>
+
+    </body>
+</html>
